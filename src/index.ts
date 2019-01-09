@@ -1,7 +1,5 @@
 const greet = (): void => {
-  // TODO: replace process.stdout.write
-  // eslint-disable-next-line no-console
-  console.log('Github Issue Exporter')
+  process.stdout.write('Github Issue Exporter\n')
 }
 
 greet()
