@@ -1,5 +1,5 @@
-import ISSUES from '../issues.json'
-import USER from '../user.json'
+import ISSUES from '../fixtures/issues.json'
+import USER from '../fixtures/user.json'
 
 const DELAY = 0
 const responses: { [url: string]: Object } = {

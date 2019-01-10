@@ -51,3 +51,15 @@ export const extractUsers = (issues: Array<Entity>) =>
       return users
     }, {}),
   )
+interface Labels {
+  [id: string]: Label.Entity
+}
+export const extractLabels = (issues: Array<Entity>) =>
+  Object.values(
+    issues.reduce((labels: Labels, issue: Entity) => {
+      issue.labels.forEach((label: Label.Entity) => {
+        labels[label.id] = label
+      })
+      return labels
+    }, {}),
+  )
