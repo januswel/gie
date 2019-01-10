@@ -1,6 +1,6 @@
 import * as User from './user'
 
-import ISSUES from '../fixtures/issues.json'
+import ISSUES from '../../fixtures/issues.json'
 
 const [{ user: USER }] = ISSUES
 

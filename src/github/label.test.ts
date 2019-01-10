@@ -1,6 +1,6 @@
 import * as Label from './label'
 
-import ISSUES from '../fixtures/issues.json'
+import ISSUES from '../../fixtures/issues.json'
 
 const [
   {

@@ -1,5 +1,5 @@
 import { request } from './api'
-import USER from '../fixtures/user.json'
+import USER from '../../fixtures/user.json'
 
 describe('getIssues', () => {
   it('returns', () => {
