@@ -1,10 +1,10 @@
-import RESPONSE from '../issues.json'
+import ISSUES from '../issues.json'
+import USER from '../user.json'
 
 const DELAY = 0
 const responses: { [url: string]: Object } = {
-  'https://api.github.com/repos/januswel/github-issues-exporter/issues': {
-    data: 'dummy',
-  },
+  'https://api.github.com/users/januswel': USER,
+  'https://api.github.com/repos/januswel/github-issues-exporter/issues': ISSUES,
 }
 
 const createResponse = (response: Object) => ({
@@ -19,7 +19,7 @@ export default (url: string, __: Object) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (url in responses) {
-        resolve(createResponse(RESPONSE))
+        resolve(createResponse(responses[url]))
       } else {
         reject(new Error(`Register URL: ${url}`))
       }
