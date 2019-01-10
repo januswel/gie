@@ -15,6 +15,8 @@ export interface Entity {
   readonly repos_url: string
   readonly events_url: string
   readonly received_events_url: string
-  readonly type: 'User'
+  readonly type: string
   readonly site_admin: boolean
 }
+
+export const getName = (user: Entity) => user.login
