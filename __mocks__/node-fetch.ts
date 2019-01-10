@@ -1,6 +1,6 @@
 const DELAY = 0
 const responses: { [url: string]: Object } = {
-  'https://api.github.com/januswel/github-issues-exporter/issues': {
+  'https://api.github.com/repos/januswel/github-issues-exporter/issues': {
     data: 'dummy',
   },
 }
