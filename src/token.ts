@@ -1,1 +1,1 @@
-export default process.env.OAUTH_TOKEN
+export default process.env.TOKEN
