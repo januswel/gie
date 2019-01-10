@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
     "charset": "utf8",
-    "target": "es2017",
+    "target": "es2018",
     "module": "commonjs",
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     "removeComments": true,
     "newLine": "LF",
     "declaration": true,
@@ -16,9 +17,5 @@
     "noUnusedParameters": true,
     "forceConsistentCasingInFileNames": true
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "**/*.test.ts"
-  ]
+  "exclude": ["node_modules", "dist", "**/*.test.ts", "__mocks__"]
 }
