@@ -2,12 +2,14 @@ env:
   browser: true
   es6: true
   node: true
+  jest/globals: true
 extends: 'eslint:recommended'
 parser: typescript-eslint-parser
 parserOptions:
   jsx: true
   useJSXTextNode: true
 plugins:
+  - jest
   - typescript
 rules:
   # https://eslint.org/docs/rules/
@@ -70,7 +72,10 @@ rules:
   no-loop-func: error
   no-magic-numbers:
     - warn
-    - enforceConst: true
+    - ignore:
+        - 0
+      enforceConst: true
+      ignoreArrayIndexes: true
   no-multi-spaces: error
   no-multi-str: error
   no-new: error
@@ -114,6 +119,7 @@ rules:
   no-shadow-restricted-names: error
   no-undef-init: error
   no-undefined: error
+  no-unused-vars: off
   no-use-before-define: error
 
   # stylistic issues
@@ -138,7 +144,7 @@ rules:
   # for typescript
   typescript/adjacent-overload-signatures: error
   typescript/class-name-casing: error
-  typescript/explicit-function-return-type: error
+  typescript/explicit-function-return-type: off
   typescript/explicit-member-accessibility: warn
   typescript/generic-type-naming: off
   typescript/interface-name-prefix: off
@@ -155,7 +161,7 @@ rules:
   typescript/no-parameter-properties:
     - error
     - allows:
-      - readonly
+        - readonly
   typescript/no-triple-slash-reference: error
   typescript/no-type-alias: off
   typescript/no-unused-vars: off

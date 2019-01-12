@@ -17,5 +17,5 @@
     "noUnusedParameters": true,
     "forceConsistentCasingInFileNames": true
   },
-  "exclude": ["node_modules", "dist", "**/*.test.ts", "__mocks__"]
+  "exclude": ["node_modules", "dist"]
 }
