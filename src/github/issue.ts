@@ -32,9 +32,33 @@ interface Entity {
 type Owner = string
 type Repository = string
 
-export const getAll = (owner: Owner, repository: Repository) => {
-  const api = `/repos/${owner}/${repository}/issues`
+const ITEMS_PER_PAGE = 1000
+const INITIAL_PAGE = 1
+const SECOND_PAGE = 2
+
+export const getPage = (owner: Owner, repository: Repository, page: number = INITIAL_PAGE) => {
+  const api = `/repos/${owner}/${repository}/issues?per_page=${ITEMS_PER_PAGE}&page=${page}`
   return API.request(api)
+}
+
+export const getAll = async (owner: Owner, repository: Repository) => {
+  const initialPage = await getPage(owner, repository)
+  const { lastPageNumber } = initialPage
+
+  if (lastPageNumber) {
+    const pages = []
+    for (let pageNumber = SECOND_PAGE; pageNumber <= lastPageNumber; ++pageNumber) {
+      pages.push(getPage(owner, repository, pageNumber))
+    }
+    return Promise.all(pages).then(results =>
+      results.reduce((result: Array<Object>, current: { body: Object }) => {
+        result.concat(current.body)
+        return result
+      }, initialPage.body),
+    )
+  }
+
+  return initialPage.body
 }
 
 interface Users {

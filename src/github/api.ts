@@ -1,4 +1,4 @@
-import fetch from 'node-fetch'
+import fetch, { Response } from 'node-fetch'
 
 import TOKEN from './token'
 
@@ -13,11 +13,41 @@ const buildDefaultOptions = () => ({
   headers: buildRequestHeaders(),
 })
 
+const extractLastPageNumber = (response: Response) => {
+  const { headers } = response
+  if (headers.has('link')) {
+    const link = headers.get('link')
+    if (link) {
+      const links = link.split(',')
+      const pattern = /; rel="last"/u
+      const [last] = links.filter(item => pattern.test(item))
+      const matches = last.match(/page=(\d+)/u)
+      if (matches) {
+        return parseInt(matches[1], 10)
+      }
+    }
+  }
+  return null
+}
+
 export const request = (api: string, options?: Object) => {
   const url = `${ENTORY_POINT}${api}`
   const actualOptions = {
     ...buildDefaultOptions(),
     ...options,
   }
-  return fetch(url, actualOptions).then(response => response.json())
+
+  return fetch(url, actualOptions).then(async response => {
+    if (!response.ok) {
+      const body = await response.text()
+      throw new Error(`${response.status} ${response.statusText}: ${body}`)
+    }
+
+    const lastPageNumber = extractLastPageNumber(response)
+    return response.json().then(json => ({
+      header: response.headers,
+      body: json,
+      lastPageNumber,
+    }))
+  })
 }
