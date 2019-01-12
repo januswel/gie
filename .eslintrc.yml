@@ -72,7 +72,10 @@ rules:
   no-loop-func: error
   no-magic-numbers:
     - warn
-    - enforceConst: true
+    - ignore:
+        - 0
+      enforceConst: true
+      ignoreArrayIndexes: true
   no-multi-spaces: error
   no-multi-str: error
   no-new: error
@@ -158,7 +161,7 @@ rules:
   typescript/no-parameter-properties:
     - error
     - allows:
-      - readonly
+        - readonly
   typescript/no-triple-slash-reference: error
   typescript/no-type-alias: off
   typescript/no-unused-vars: off
