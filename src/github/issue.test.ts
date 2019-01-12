@@ -45,7 +45,7 @@ const LABELS = [
 describe('Issue', () => {
   describe('extractUsers', () => {
     it('returns an array of User', async () => {
-      const issues = await Issue.getIssues('januswel', 'github-issues-exporter')
+      const issues = await Issue.getAll('januswel', 'github-issues-exporter')
       const users = Issue.extractUsers(issues)
       expect(users).toEqual(USERS)
     })
@@ -53,7 +53,7 @@ describe('Issue', () => {
 
   describe('extractLabels', () => {
     it('returns an array of Label', async () => {
-      const issues = await Issue.getIssues('januswel', 'github-issues-exporter')
+      const issues = await Issue.getAll('januswel', 'github-issues-exporter')
       const labels = Issue.extractLabels(issues)
       expect(labels).toEqual(LABELS)
     })

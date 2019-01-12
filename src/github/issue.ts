@@ -32,7 +32,7 @@ interface Entity {
 type Owner = string
 type Repository = string
 
-export const getIssues = (owner: Owner, repository: Repository) => {
+export const getAll = (owner: Owner, repository: Repository) => {
   const api = `/repos/${owner}/${repository}/issues`
   return API.request(api)
 }
