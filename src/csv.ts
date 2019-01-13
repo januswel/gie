@@ -27,6 +27,18 @@ const escape = (field: string) => {
   }
   return field
 }
+const convert = (value: any, mapper?: Function) => {
+  if (value == null) {
+    return ''
+  }
+
+  if (mapper) {
+    return escape(mapper(value).toString())
+  }
+
+  return escape(value.toString())
+}
+
 export const stringify = (data: Array<Object>, mappings: Array<Mapping>) => {
   const header = generateHeader(mappings)
 
@@ -35,24 +47,19 @@ export const stringify = (data: Array<Object>, mappings: Array<Mapping>) => {
     for (let i = 0; i < mappings.length; ++i) {
       const mapping = mappings[i]
       if (typeof mapping === 'string') {
-        result.push(escape(record[mapping].toString()))
+        const value = record[mapping]
+        result.push(convert(value))
         continue
       }
+
       if (mapping.summarize) {
         const value = record[mapping.key]
-        if (value != null) {
-          result.push(escape(mapping.summarize(value).toString()))
-        } else {
-          result.push('')
-        }
+        result.push(convert(value, mapping.summarize))
         continue
       }
+
       const value = record[mapping.key]
-      if (value != null) {
-        result.push(escape(value.toString()))
-      } else {
-        result.push('')
-      }
+      result.push(convert(value))
     }
     return result.join(',')
   })

@@ -50,7 +50,6 @@ const buildQuery = (options: { [key: string]: any }) =>
 export const getPage = (owner: Owner, repository: Repository, page: number = INITIAL_PAGE) => {
   const query = buildQuery(OPTIONS).replace('$page', page.toString())
   const api = `/repos/${owner}/${repository}/issues?${query}`
-  console.error(api)
   return API.request(api)
 }
 
@@ -58,20 +57,18 @@ export const getAll = async (owner: Owner, repository: Repository) => {
   const initialPage = await getPage(owner, repository)
   const { lastPageNumber } = initialPage
 
-  if (lastPageNumber) {
-    const pages = []
-    for (let pageNumber = SECOND_PAGE; pageNumber <= lastPageNumber; ++pageNumber) {
-      pages.push(getPage(owner, repository, pageNumber))
-    }
-    return Promise.all(pages).then(results =>
-      results.reduce((result: Array<Object>, current: { body: Object }) => {
-        result.concat(current.body)
-        return result
-      }, initialPage.body),
-    )
+  if (!lastPageNumber) {
+    return initialPage.body
   }
 
-  return initialPage.body
+  const pages = []
+  for (let pageNumber = SECOND_PAGE; pageNumber <= lastPageNumber; ++pageNumber) {
+    pages.push(getPage(owner, repository, pageNumber))
+  }
+
+  return Promise.all(pages).then(results =>
+    results.reduce((result: Array<Object>, current: { body: Object }) => result.concat(current.body), initialPage.body),
+  )
 }
 
 interface Users {
