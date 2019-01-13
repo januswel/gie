@@ -4,7 +4,7 @@ import USER from '../fixtures/user.json'
 const DELAY = 0
 const responses: { [url: string]: Object } = {
   'https://api.github.com/users/januswel': USER,
-  'https://api.github.com/repos/januswel/github-issues-exporter/issues?per_page=1000&page=1': ISSUES,
+  'https://api.github.com/repos/januswel/github-issues-exporter/issues?state=all&per_page=1000&page=1': ISSUES,
 }
 
 const HTTP_OK = 200
