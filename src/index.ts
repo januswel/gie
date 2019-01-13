@@ -1,5 +1,6 @@
-const greet = (): void => {
-  process.stdout.write('Github Issue Exporter\n')
-}
+import * as Issue from './github/issue'
+import * as User from './github/user'
+import * as Label from './github/label'
+import * as Milestone from './github/milestone'
 
-greet()
+export { Issue, User, Label, Milestone }
