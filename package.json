@@ -2,7 +2,7 @@
   "name": "@januswel/gie",
   "description": "Export issues from Github repository",
   "author": "Takagi Kensuke <janus.wel.3@gmail.com>",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "main": "dist/index.js",
   "bin": "bin/gie",
