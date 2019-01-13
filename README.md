@@ -8,6 +8,12 @@ Github issues exporter
 npm install @januswel/gie
 ```
 
+For authentication, an environment variable "TOKEN" is used.
+
+```console
+export TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+
 ## Usage
 
 ```
@@ -23,11 +29,11 @@ Issue.getAll(owner, repo).then(issues => {
 ## CLI
 
 ```console
-npx @januswel/gie issues januswel gie
+TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx npx @januswel/gie issues januswel gie
 ```
 
 in CSV
 
 ```console
-npx @januswel/gie issues januswel gie --csv
+TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx npx @januswel/gie issues januswel gie --csv
 ```
