@@ -15,19 +15,28 @@ const buildDefaultOptions = () => ({
 
 const extractLastPageNumber = (response: Response) => {
   const { headers } = response
-  if (headers.has('link')) {
-    const link = headers.get('link')
-    if (link) {
-      const links = link.split(',')
-      const pattern = /; rel="last"/u
-      const [last] = links.filter(item => pattern.test(item))
-      const matches = last.match(/page=(\d+)/u)
-      if (matches) {
-        return parseInt(matches[1], 10)
-      }
-    }
+  if (!headers.has('link')) {
+    return null
   }
-  return null
+
+  const link = headers.get('link')
+  if (!link) {
+    return null
+  }
+
+  const links = link.split(',')
+  const pattern = /; rel="last"/u
+  const [last] = links.filter(item => pattern.test(item))
+  if (!last) {
+    return null
+  }
+
+  const matches = last.match(/&page=(\d+)/u)
+  if (!matches) {
+    return null
+  }
+
+  return parseInt(matches[1], 10)
 }
 
 export const request = (api: string, options?: Object) => {
