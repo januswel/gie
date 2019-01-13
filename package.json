@@ -1,10 +1,11 @@
 {
-  "name": "@januswel/github-issue-exporter",
+  "name": "@januswel/gie",
   "description": "Export issues from Github repository",
   "author": "Takagi Kensuke <janus.wel.3@gmail.com>",
   "version": "0.1.0",
   "license": "MIT",
   "main": "dist/index.js",
+  "bin": "bin/gie",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "lint": "find src -name *.ts | xargs eslint",
