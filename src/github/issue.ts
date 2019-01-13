@@ -36,8 +36,21 @@ const ITEMS_PER_PAGE = 1000
 const INITIAL_PAGE = 1
 const SECOND_PAGE = 2
 
+const OPTIONS = {
+  state: 'all',
+  per_page: ITEMS_PER_PAGE,
+  page: '$page',
+}
+
+const buildQuery = (options: { [key: string]: any }) =>
+  Object.keys(options)
+    .map(key => `${key}=${options[key].toString()}`)
+    .join('&')
+
 export const getPage = (owner: Owner, repository: Repository, page: number = INITIAL_PAGE) => {
-  const api = `/repos/${owner}/${repository}/issues?per_page=${ITEMS_PER_PAGE}&page=${page}`
+  const query = buildQuery(OPTIONS).replace('$page', page.toString())
+  const api = `/repos/${owner}/${repository}/issues?${query}`
+  console.error(api)
   return API.request(api)
 }
 
