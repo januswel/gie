@@ -22,7 +22,8 @@ const generateHeader = (mappings: Array<Mapping>) => {
 const PATTERN = /[,"\n]/u
 const escape = (field: string) => {
   if (PATTERN.test(field)) {
-    return `"${field.replace('"', '""')}"`
+    const replaced = field.replace(/"/gu, '""')
+    return `"${replaced}"`
   }
   return field
 }
