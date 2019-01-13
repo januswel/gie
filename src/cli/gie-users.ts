@@ -3,7 +3,7 @@ import program from 'commander'
 import PackageInformation from '../../package.json'
 import * as Issue from '../github/issue'
 import * as CSV from '../csv'
-import csvMappingsIssues from './csv-mappings-issues'
+import csvMappingsUsers from './csv-mappings-users'
 
 const { version } = PackageInformation
 
@@ -15,11 +15,12 @@ export default () => {
     .action((owner, repo, options) => {
       Issue.getAll(owner, repo)
         .then(issues => {
+          const users = Issue.extractUsers(issues)
           if (options.csv) {
-            process.stdout.write(`${CSV.stringify(issues, csvMappingsIssues)}`)
+            process.stdout.write(`${CSV.stringify(users, csvMappingsUsers)}`)
             return
           }
-          process.stdout.write(`${JSON.stringify(issues)}\n`)
+          process.stdout.write(`${JSON.stringify(users)}\n`)
         })
         .catch(e => {
           process.stderr.write(`${e.message}\n`)
