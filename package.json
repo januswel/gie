@@ -9,6 +9,7 @@
     "build": "tsc -p tsconfig.build.json",
     "lint": "find src -name *.ts | xargs eslint",
     "prebuild": "rm -rf dist",
+    "prepare": "npm run build",
     "prestart": "yarn build",
     "start": "node ./dist/index.js",
     "test": "jest"
