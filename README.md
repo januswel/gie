@@ -14,6 +14,10 @@ For authentication, an environment variable "TOKEN" is used.
 export TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
+A `repo` scope is required for private repositories.
+
+![scope](./scope.png)
+
 ## Usage
 
 ```
